@@ -1,7 +1,4 @@
 {% extends "base.html" %}
-{% block head %}
-<link rel="stylesheet" href="/css/login.css">
-{% endblock %}
 
 {% block title %}Login{% endblock %}
 {% block content %}
@@ -12,6 +9,9 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Sign in to your account
                 </h1>
+                <p class="text-xs font-bold leading-tight tracking-tight text-red-500 md:text-xs dark:text-white">
+                    {{error}}
+                </p>
                 <form class="space-y-4 md:space-y-6" action="/" method="post">
                     <div>
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
@@ -25,7 +25,7 @@
                         >
                     </div>
                     <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Login</label>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                         <input
                             type="password"
                             name="password"

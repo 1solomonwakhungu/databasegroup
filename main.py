@@ -13,6 +13,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
+        print("[*] LOGIN:", username, password)
         if username == 'admin' and password == 'password':
             session['logged_in'] = True
             return redirect(url_for('home'))

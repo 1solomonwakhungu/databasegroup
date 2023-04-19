@@ -49,13 +49,23 @@ def home():
     else:
         return redirect(url_for('login'))
 
+
 @app.route('/doctor/<int:action>')
 def doctors(action):
     if session.get('logged_in'):
-        return render_template('doctor_test.html', action = action)
+        return render_template('doctor_func.html', action=action)
     else:
         return redirect(url_for('login'))
-    
+
+
+@app.route('/receptionist/<int:action>')
+def receptionists(action):
+    if session.get('logged_in'):
+        return render_template('receptionist_func.html', action=action)
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route('/logout')
 def logout():
     session['logged_in'] = False

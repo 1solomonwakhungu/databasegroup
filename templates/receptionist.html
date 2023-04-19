@@ -1,0 +1,18 @@
+<section class="bg-white dark:bg-gray-900">
+    <div class="container px-6 py-10 mx-auto">
+        <h1 class="text-2xl font-semibold text-left text-gray-800 capitalize lg:text-3xl dark:text-white">receptionist</h1>
+        <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4"
+             style="margin-top:1em">
+            {% for key, func in context.recept_func.items() %}
+                <a href="/nurse/{{ key }}">
+                    <div class="flex flex-col items-center justify-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 dark:border-gray-700 dark:hover:border-transparent h-full">
+                        <h1 class="mt-4 text-xl font-semibold text-gray-700 capitalize dark:text-white group-hover:text-white"
+                            style="margin-top:0px;">
+                            {{ func }}
+                        </h1>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>

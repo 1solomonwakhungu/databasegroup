@@ -1,4 +1,4 @@
-from connector import MYDB
+import connector
 
 RECEPTIONIST_FUNCTIONS = {
     1: "assign doctor to room",

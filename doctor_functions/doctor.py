@@ -1,4 +1,4 @@
-from connector import MYDB
+import connector
 
 DOCTOR_FUNCTIONS = {
     1: "assign prescription",

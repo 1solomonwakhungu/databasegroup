@@ -1,4 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+import mysql.connector
+
+# Connect to local sql server
+mydb = mysql.connector.connect(host = "localhost", user = "root", passwd = "VedNigam1", database = "hospital_db")
+mycursor = mydb.cursor()
 
 app = Flask(__name__, static_url_path='',
             static_folder='./static',
@@ -13,9 +18,15 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
+        mycursor.execute('SELECT * FROM employee WHERE username = %s AND password = %s', (username, password,))
+        
+        # Fetch one record and return result
+        account = mycursor.fetchone()
+
         print("[*] LOGIN:", username, password)
-        if username == 'admin' and password == 'password':
+        if account:
             session['logged_in'] = True
+            # session['username'] = account['username']
             return redirect(url_for('home'))
         else:
             return render_template('login.html', error='Invalid username or password')
@@ -26,7 +37,7 @@ def login():
 @app.route('/home')
 def home():
     if session.get('logged_in'):
-        return render_template('home.html')
+        return render_template('buttons.html')
     else:
         return redirect(url_for('login'))
 

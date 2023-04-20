@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-import connector
+from connector import MYDB
 import receptionist_functions.receptionist as receptionist
 import doctor_functions.doctor as doctor
 
@@ -7,6 +7,8 @@ app = Flask(__name__, static_url_path='',
             static_folder='./static',
             template_folder='./templates')
 app.secret_key = 'QB*&jy1MlTK@aA#gn&OEG*m4zzUk4F'
+
+mycursor = MYDB.cursor()
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -22,10 +24,13 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        # account = connector.fetch_one('SELECT * FROM employee WHERE username = %s AND password = %s', (username, password,))
+        mycursor.execute('SELECT * FROM employee WHERE username = %s AND password = %s', (
+            username, password,))
+
+        account = mycursor.fetchone()
 
         print("[*] LOGIN:", username, password)
-        if 1 == 1:
+        if account:
             session['logged_in'] = True
             # session['username'] = account['username']
             return redirect(url_for('home'))

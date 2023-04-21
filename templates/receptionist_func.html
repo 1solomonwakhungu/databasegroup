@@ -1,1 +1,5 @@
-{{action}}
+{% extends "base.html" %}
+{% block title %}{{ context.action_name }}{% endblock %}
+{% block content %}
+    {% include '/receptionist_func/receptionist-'+context.action|string+'.html' %}
+{% endblock %}

@@ -66,7 +66,25 @@ def doctors(action):
 @app.route('/receptionist/<int:action>')
 def receptionists(action):
     if session.get('logged_in'):
-        return render_template('receptionist_func.html', action=action)
+        action_name = ""
+        data = {}
+        match action:
+            case 1:
+                action_name = "view all doctors"
+                data = receptionist.view_doctors()
+                print(data[1][0])
+            case 2:
+                action_name = "example"
+            case _:
+                action_name = ""
+
+        # Information passed to the html template
+        context = {
+            'action_name': action_name,
+            'action': action,
+            'data': data,
+        }
+        return render_template('receptionist_func.html', context=context)
     else:
         return redirect(url_for('login'))
 

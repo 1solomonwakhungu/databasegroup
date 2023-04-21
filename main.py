@@ -72,7 +72,6 @@ def receptionists(action):
             case 1:
                 action_name = "view all doctors"
                 data = receptionist.view_doctors()
-                print(data[1][0])
             case 2:
                 action_name = "example"
             case _:

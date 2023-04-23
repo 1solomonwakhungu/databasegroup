@@ -11,7 +11,7 @@ def assign_nurse_room(nurse_id, room_number):
     mycursor.execute('SELECT * FROM employee WHERE id = %s AND role = "nurse"', (nurse_id,))
     nurse = mycursor.fetchone()
     if nurse is None:
-        return "Invalid nurse ID"
+        return {}
 
     mycursor.execute('SELECT * FROM room WHERE room_number = %s', (room_number,))
     room = mycursor.fetchone()

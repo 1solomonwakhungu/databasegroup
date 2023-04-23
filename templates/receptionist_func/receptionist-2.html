@@ -51,9 +51,7 @@ xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.send(JSON.stringify({nurseId: nurseId, roomNumber: roomNumber}));
 }
 
-javascript
-Copy code
-// Attach event listener to the form submit button
+
 const form = document.querySelector('form');
 form.addEventListener('submit', function (event) {
     event.preventDefault(); // prevent the form from submitting normally

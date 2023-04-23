@@ -14,10 +14,7 @@ mycursor = MYDB.cursor()
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        if session['logged_in'] == True:
-            return redirect(url_for('home'))
-        else:
-            return render_template('login.html')
+        return render_template('login.html')
 
     if request.method == 'POST':
         # Check if the username and password are correct
@@ -58,7 +55,22 @@ def home():
 @app.route('/doctor/<int:action>')
 def doctors(action):
     if session.get('logged_in'):
-        return render_template('doctor_func.html', action=action)
+        action_name = ""
+        data = {}
+        match action:
+            case 1:
+                action_name = "change report status"
+                data = doctor.changeReportStatus()
+            case _:
+                action_name = ""
+
+        # Information passwed to the html template
+        context = {
+            'action_name': action_name,
+            'action': action,
+            'data': data
+        }
+        return render_template('doctor_func.html', context=context)
     else:
         return redirect(url_for('login'))
 

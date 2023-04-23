@@ -1,1 +1,5 @@
-{{ context.action }}
+{% extends "base.html" %}
+{% block title %}{{ context.action_name }}{% endblock %}
+{% block content %}
+    {% include '/doctor_func/doctor-'+context.action|string+'.html' %}
+{% endblock %}

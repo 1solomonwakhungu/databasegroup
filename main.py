@@ -85,7 +85,7 @@ def receptionists(action):
                 nurse_id = request.form['nurse_id']
                 room_number = request.form['room_number']
                 result = receptionist.assign_nurse_room(nurse_id, room_number)
-                return render_template('assign_nurse_room.html', result=result)
+                
         else:
             match action:
                 case 1:

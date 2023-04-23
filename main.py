@@ -75,17 +75,27 @@ def doctors(action):
         return redirect(url_for('login'))
 
 
-@app.route('/receptionist/<int:action>')
+@app.route('/receptionist/<int:action>', methods=['GET', 'POST'])
 def receptionists(action):
     if session.get('logged_in'):
         action_name = ""
         data = {}
+
+        if request.method == 'POST':
+            if action == 2:
+                patient_id = request.form['patient_id']
+                doctor_id = request.form['doctor_id']
+                appointment_date = request.form['appointment_date']
+                appointment_time = request.form['appointment_time']
+                data = receptionist.create_appointment(
+                    patient_id, doctor_id, appointment_date, appointment_time)
+                data = jsonify(data)
         match action:
             case 1:
                 action_name = "view all doctors"
                 data = receptionist.view_doctors()
             case 2:
-                action_name = "example"
+                action_name = "create an appointment"
             case _:
                 action_name = ""
 

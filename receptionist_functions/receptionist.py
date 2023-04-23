@@ -1,8 +1,15 @@
 import connector
 
 RECEPTIONIST_FUNCTIONS = {
-    1: "assign doctor to room",
-    2: "assign nurse to room",
-    3: "list all the doctors",
-    4: "list all the nurses",
+    1: "view all doctors",
+    2: "assign nurse to room"
 }
+
+def assign_nurse_room();
+
+# function by Solomon
+def view_doctors():
+    mycursor = connector.MYDB.cursor()
+    mycursor.execute('SELECT * FROM doctorinfoview')
+    doctors = mycursor.fetchall()
+    return doctors

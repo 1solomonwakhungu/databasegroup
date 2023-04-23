@@ -1,8 +1,10 @@
 import connector
 
 DOCTOR_FUNCTIONS = {
-    1: "assign prescription",
-    2: "get patient information",
-    3: "go to room",
-    4: "example function"
+    1: "change report status"
 }
+
+# function by Ved
+def changeReportStatus():
+    mycursor = connector.MYDB.cursor()
+    

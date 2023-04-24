@@ -69,7 +69,7 @@ def doctors(action):
             if action == 2:
                 reportID = request.form['report_id']
                 medicineName = request.form['medicine_name']
-                value = request.form['value']
+                value = request.form['submit']
                 data = doctor.perscsription(reportID, medicineName, value)
 
             #Function 3 Here

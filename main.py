@@ -27,7 +27,7 @@ def login():
         account = mycursor.fetchone()
 
         print("[*] LOGIN:", username, password)
-        if 1 == 1:
+        if account:
             session['logged_in'] = True
             # session['username'] = account['username']
             return redirect(url_for('home'))

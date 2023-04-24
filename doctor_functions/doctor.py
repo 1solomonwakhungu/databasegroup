@@ -2,6 +2,15 @@ from pickle import FALSE
 import connector
 
 
+DOCTOR_FUNCTIONS = {
+    1: "change report status"
+}
+
+# function by Ved
+def changeReportStatus():
+    mycursor = connector.MYDB.cursor()
+    
+
 #DOCTOR_FUNCTIONS:
 #    1: "assign prescription"
 #    2: "get patient information"

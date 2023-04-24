@@ -58,29 +58,26 @@ def doctors(action):
         action_name = ""
         data = {}
 
-        if request.method == 'GET':
-            return render_template('doctor_func.html')
-
         if request.method == 'POST':
-            #other fucnitons go here as if statments of action == number
-            #if action == 1:
-                #data = doctor.changeReportStatus()
+            # other fucnitons go here as if statments of action == number
+            # if action == 1:
+            # data = doctor.changeReportStatus()
 
             if action == 2:
                 reportID = request.form['report_id']
                 medicineName = request.form['medicine_name']
                 value = request.form['submit']
-                data = doctor.perscsription(reportID, medicineName, value)
+                data = doctor.perscription(reportID, medicineName, value)
 
-            #Function 3 Here
+            # Function 3 Here
 
             # Information passed to the html template
-            context = {
-                'action_name': action_name,
-                'action': action,
-                'data': data
-            }
-            return render_template('doctor_func.html', context=context)
+        context = {
+            'action_name': action_name,
+            'action': action,
+            'data': data
+        }
+        return render_template('doctor_func.html', context=context)
     else:
         return redirect(url_for('login'))
 

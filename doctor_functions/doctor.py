@@ -21,12 +21,14 @@ def perscription(reportID, medicineName, value):
     if value == 'Positive':
             # Execute SQL Statement to add/update/remove new persciption and reportID
             mycursor.execute('INSERT INTO medicine (medicineId, reportId, medicineName) VALUES (%s, %s, %s)',(medicineID, reportID, medicineName))
+            connector.MYDB.commit()
             output = "Successfully added perscription to patient report ID: %s", (reportID)
             return (output)
         # IF remove perscription
     if value == 'Neagive':
             # Execute SQL statement to remove perscription from list
             mycursor.execute('DELETE FROM medicine WHERE medicineId = %s AND reportId = %s AND medicineName = %s',(medicineID, reportID, medicineName))
+            connector.MYDB.commit()
             ouput = "Successfully removed medicine from patient reportID: %s", (reportID)
             return (output)
         

@@ -1,63 +1,52 @@
-from pickle import FALSE
 import connector
 
 
 DOCTOR_FUNCTIONS = {
-    1: "change report status"
+    1: "change report status",
+    2: "Assign Perscription",
+    3: "Patient Info"
 }
 
+
+def perscription(reportID, medicineName, value):
+    mycursor = connector.MYDB.cursor()
+    # get medicine ID from table if it exists
+    mycursor.execute(
+        'SELECT medicineId FROM medicine WHERE mediciNename = %s', (medicineName))
+    medID = mycursor.fetchone()
+    medicineID = medID['medicineId']
+
+    # fetch any existing rows that already have a medicine name attched to the Report ID
+    mycursor.execute(
+        'SELECT * FROM medicine WHERE reportId = %s, medicineName = %s', (reportID, medicineName))
+    medicine = mycursor.fetchone()
+
+    # check if medicine name already exisits in the report ID
+    if medicine['reportId'] == reportID & medicine['medicineName'] == medicineName:
+        return ("Medicine already exists for report ID: %s", (reportID))
+    else:
+        # IF add perscription
+        if value == 'Positive':
+            # Execute SQL Statement to add/update/remove new persciption and reportID
+            mycursor.execute('INSERT INTO medicine (medicineId, reportId, medicineName) VALUES (%s, %s, %s)',
+                             (medicineID, reportID, medicineName))
+            return ("Successfully added perscription to patient report ID: %s", (reportID))
+        # IF remove perscription
+        elif value == 'Neagive':
+            # Execute SQL statement to remove perscription from list
+            mycursor.execute('DELETE FROM medicine WHERE medicineId = %s AND reportId = %s AND medicineName = %s',
+                             (medicineID, reportID, medicineName))
+            return ("Successfully removed medicine from patient reportID: %s", (reportID))
+        elif value == 'view':
+            return (mycursor.execute('SELECT * FROM medicine'))
+
 # function by Ved
+
+
 def changeReportStatus():
     mycursor = connector.MYDB.cursor()
-    
 
-#DOCTOR_FUNCTIONS:
-#    1: "assign prescription"
-#    2: "get patient information"
-#    3: "go to room"
-#    4: "example function"
-
-
-methods=['PERSCRIPTION', 'PATIENT', 'ROOM']
-def Doctor():
-    if request.method == 'PERSCRIPTION':
-        perscription()
-    elif request.method == 'PATIENT':
-        patientInfo()
-    elif request.method == 'ROOM':
-        roomInfo()
-
-def perscription():
-    ##Initialize values for add and remove prescriptions
-    addPerscrip = False
-    removePerscrip = False
-    ##Check input
-    medicineID = request.form['medicineID']
-    reportID = request.form['reportID']
-    medicineName = request.form['medicineName']
-
-    ##check if medicine already exisits in table
-    mycursor.execute('SELECT * FROM medicine WHERE medicineID = %s, medicineName = %s', (medicineID, medicineName))
-    medicine = mycursor.fetchone()
-    if medicine[medicineID] == medicineID & medicine[medicineName] == medicineName :
-        print("Data already exists in table")
-        perscription()
-    
-
-    ##IF add perscription
-    if addPerscrip == True:
-        ##Execute SQL Statement to add/update/remove new persciption and reportID
-        mycursor.execute('INSERT INTO medicine (medicineID, reportID, medicineName) VALUES (%s, %s, %s)', (medicineID, reportID, medicineName))
-    ##IF remove perscription
-    elif removePerscrip == True:
-            ##Execute SQL statement to remove perscription from list
-            mycursor.execute('DELETE FROM medicine WHERE medicineID = %s AND reportID = %s AND medicineName = %s', (medicineID, reportID, medicineName))
-
-def patientInfo():
-    ##Request patient name/id
-    patientName = request.form['patientName']
-    patientID = request.form['patientID']
-
-def roomInfo():
-    ##Request room info?
-    roomNo = request.form['roomNo']
+# def patientInfo():
+    # Request patient name/id
+#    patientName =
+#    patientID =

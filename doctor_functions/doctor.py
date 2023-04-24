@@ -13,8 +13,8 @@ def perscription(reportID, medicineName, value):
     # get medicine ID from table if it exists
     mycursor.execute(
         'SELECT medicineId FROM medicine WHERE mediciNename = %s', (medicineName))
-    medicineID = mycursor.fetchone()
-    medicineID = medicineID['medicineId']
+    medID = mycursor.fetchone()
+    medicineID = medID['medicineId']
 
     # fetch any existing rows that already have a medicine name attched to the Report ID
     mycursor.execute(

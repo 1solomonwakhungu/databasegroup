@@ -43,20 +43,14 @@ def update():
 
     if request.method == 'POST':
         # Check if the username and password are correct
-        username = request.form['username']
-        password = request.form['password']
+        username = request.values.get('username')
+        password = request.values.get('password')
 
-        mycursor.execute('SELECT * FROM employee WHERE username = %s AND password = %s', (
-            username, password,))
+        mycursor.execute(
+            "UPDATE employee SET password = '%s' WHERE username = '%s'", (password, username))
 
-        account = mycursor.fetchone()
+        MYDB.commit()
         print(account, username, password)
-        if account:
-            session['logged_in'] = True
-            # session['username'] = account['username']
-            return redirect(url_for('home'))
-        else:
-            return render_template('update.html', error='Invalid username or password')
     else:
         return render_template('update.html')
 
@@ -65,7 +59,7 @@ def update():
 def home():
     if session['logged_in'] == True:
         return render_template('home.html')
-    return rredirect(url_for('login'))
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':

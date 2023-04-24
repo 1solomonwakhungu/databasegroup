@@ -3,8 +3,9 @@ import connector
 mycursor = connector.MDBY.mycursor()
 
 DOCTOR_FUNCTIONS = {
-    1: "action1",
+    1: "change report status",
     2: "Assign Perscription",
+    3: "Patient Info"
 }
 
 
@@ -12,9 +13,11 @@ def perscription(reportID, medicineName, value):
     #get medicine ID from table if it exists
     mycursor.execute('SELECT medicineid WHERE medicinename = %s', (medicineName))
     medicineID = mycursor.fetchone()
+    
     #fetch any existing rows that already have a medicine name attched to the Report ID
     mycursor.execute('SELECT * FROM medicine WHERE reportID = %s, medicineName = %s', (reportID, medicineName))
     medicine = mycursor.fetchone()
+    
     #check if medicine name already exisits in the report ID
     if medicine['reportID'] == reportID & medicine['medicineName'] == medicineName :
         return("Medicine already exists for report ID: %s" , (reportID))
@@ -32,6 +35,10 @@ def perscription(reportID, medicineName, value):
         elif value == 'view':
             return(mycursor.execute('SELECT * FROM medicine'))
 
+# function by Ved
+def changeReportStatus():
+    mycursor = connector.MYDB.cursor()
+    
 #def patientInfo():
     #Request patient name/id
 #    patientName = 

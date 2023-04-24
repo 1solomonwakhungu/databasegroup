@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            {% block title %}{% endblock %} - Database App
-        </title>
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {% block title %}{% endblock %}
+      - Database App
+    </title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
             tailwind.config = {
   darkMode: 'class',
   theme: {
@@ -56,14 +57,13 @@
     }
   }
 }
-        </script>
-        {% block head %}
-        {% endblock %}
-    </head>
-    <body>
-        <div class="content">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </body>
+    </script>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+  </body>
 </html>

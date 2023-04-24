@@ -51,7 +51,10 @@ def changeReportStatus(reportId, newReportStatus):
 
 
 
-# def patientInfo():
-    # Request patient name/id
-#    patientName =
-#    patientID =
+def patientInfo():
+    mycursor = connector.MYDB.cursor()
+    mycursor.execute(
+        'SELECT * FROM patientInfoView'
+    )
+    patients = mycursor.fetchall()
+    return patients

@@ -70,9 +70,11 @@ def doctors(action):
                 medicineName = request.form['medicine_name']
                 value = request.form['submit']
                 data = doctor.perscription(reportID, medicineName, value)
-
+        else:
+            if action == 3:
+                action_name = "Patient Info"
+                data = doctor.patientInfo()
             # Function 3 Here
-
             # Information passed to the html template
         context = {
             'action_name': action_name,
@@ -103,6 +105,18 @@ def receptionists(action):
                 }
                 return render_template('receptionist_func.html', context=context)
                 # return redirect(url_for('receptionists', action=2))
+            if action == 3:
+                date = request.form['date']
+                time = request.form['time']
+                data = receptionist.create_appointment(
+                    date, time)
+                data = jsonify(data)            
+                context = {
+                    'action_name': "create appointment",
+                    'action': 3,
+                    'data': data,
+                }
+                return render_template('receptionist_func.html', context=context)
         else:
             match action:
                 case 1:

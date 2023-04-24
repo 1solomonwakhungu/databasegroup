@@ -21,8 +21,8 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        mycursor.execute('SELECT * FROM employee WHERE username = %s AND password = %s', (
-            username, password,))
+        mycursor.execute(
+            "SELECT * FROM employee WHERE username = '%s' AND password = '%s'" % (username, password))
 
         account = mycursor.fetchone()
 

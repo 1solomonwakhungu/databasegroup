@@ -16,12 +16,11 @@ def login():
 
     if request.method == 'POST':
         # Check if the username and password are correct
-        username = request.form['username']
-        password = request.form['password']
+        username = request.values.get('username')
+        password = request.values.get('password')
 
-        sql = 'SELECT * FROM employee WHERE username ="' + \
-            username + '" AND password ="' + password + '"'
-        mycursor.execute(sql)
+        mycursor.execute(
+            "SELECT * FROM employee WHERE username = '%s' AND password = '%s'" % (username, password))
 
         account = mycursor.fetchall()
         # mycursor

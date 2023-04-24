@@ -86,7 +86,13 @@ def receptionists(action):
                 nurse_id = request.form['nurse_id']
                 room_number = request.form['room_number']
                 result = receptionist.assign_nurse_room(nurse_id, room_number)
-                data = {'message': "worked"}
+
+                context = {
+                    'action_name': "assign nurse to room",
+                    'action': 2,
+                    'data': result,
+                }
+                return render_template('receptionist_func.html', context=context)
                 # return redirect(url_for('receptionists', action=2))
         else:
             match action:

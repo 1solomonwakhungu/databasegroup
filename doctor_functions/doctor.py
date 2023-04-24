@@ -9,6 +9,7 @@ DOCTOR_FUNCTIONS = {
 
 
 def perscription(reportID, medicineName, value):
+    output = ""
     mycursor = connector.MYDB.cursor()
     # get medicine ID from table if it exists
     mycursor.execute(
@@ -16,29 +17,19 @@ def perscription(reportID, medicineName, value):
     medID = mycursor.fetchone()
     medicineID = medID['medicineId']
 
-    # fetch any existing rows that already have a medicine name attched to the Report ID
-    mycursor.execute(
-        'SELECT * FROM medicine WHERE reportId = %s, medicineName = %s', (reportID, medicineName))
-    medicine = mycursor.fetchone()
-
-    # check if medicine name already exisits in the report ID
-    if medicine['reportId'] == reportID & medicine['medicineName'] == medicineName:
-        return ("Medicine already exists for report ID: %s", (reportID))
-    else:
-        # IF add perscription
-        if value == 'Positive':
+    # IF add perscription
+    if value == 'Positive':
             # Execute SQL Statement to add/update/remove new persciption and reportID
-            mycursor.execute('INSERT INTO medicine (medicineId, reportId, medicineName) VALUES (%s, %s, %s)',
-                             (medicineID, reportID, medicineName))
-            return ("Successfully added perscription to patient report ID: %s", (reportID))
+            mycursor.execute('INSERT INTO medicine (medicineId, reportId, medicineName) VALUES (%s, %s, %s)',(medicineID, reportID, medicineName))
+            output = "Successfully added perscription to patient report ID: %s", (reportID)
+            return (output)
         # IF remove perscription
-        elif value == 'Neagive':
+    if value == 'Neagive':
             # Execute SQL statement to remove perscription from list
-            mycursor.execute('DELETE FROM medicine WHERE medicineId = %s AND reportId = %s AND medicineName = %s',
-                             (medicineID, reportID, medicineName))
-            return ("Successfully removed medicine from patient reportID: %s", (reportID))
-        elif value == 'view':
-            return (mycursor.execute('SELECT * FROM medicine'))
+            mycursor.execute('DELETE FROM medicine WHERE medicineId = %s AND reportId = %s AND medicineName = %s',(medicineID, reportID, medicineName))
+            ouput = "Successfully removed medicine from patient reportID: %s", (reportID)
+            return (output)
+        
 
 # function by Ved
 def changeReportStatus(reportId, newReportStatus):

@@ -70,11 +70,11 @@ def doctors(action):
                 medicineName = request.form['medicine_name']
                 value = request.form['submit']
                 data = doctor.perscription(reportID, medicineName, value)
-        else:
-            if action == 3:
-                action_name = "Patient Info"
-                data = doctor.patientInfo()
-            # Function 3 Here
+            else:
+                if action == 3:
+                    action_name = "Patient Info"
+                    data = doctor.patientInfo()
+                # Function 3 Here
             # Information passed to the html template
         context = {
             'action_name': action_name,

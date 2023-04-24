@@ -1,0 +1,67 @@
+<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 h-screen">
+    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white"
+            style="margin-bottom: 1em">
+            {{ context.action_name }}
+        </h1>
+        <h1 class="text-2xl font-semibold text-center text-green-800 capitalize lg:text-3xl dark:text-white"
+            style="margin-bottom: 1em">
+            {{ context.data.message }}
+        </h1>
+        <!-- Start coding here -->
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                <div class="w-full md:w-1/2">
+                    <form class="flex items-center" method="POST" action="/receptionist/2">
+                        <label for="nurse_id"
+                               class="block font-medium text-gray-700 dark:text-gray-200">Nurse ID:</label>
+                        <input type="number"
+                               name="nurse_id"
+                               id="nurse_id"
+                               placeholder="Enter Nurse ID"
+                               class="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:border-blue-500 dark:focus:border-blue-500 dark:focus:shadow-md dark:focus:ring-opacity-50"
+                               required>
+                        <label for="room_number"
+                               class="block font-medium text-gray-700 dark:text-gray-200 mt-3">Room Number:</label>
+                        <input type="number"
+                               name="room_number"
+                               id="room_number"
+                               placeholder="Enter Room Number"
+                               class="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:border-blue-500 dark:focus:border-blue-500 dark:focus:shadow-md dark:focus:ring-opacity-50"
+                               required>
+                        <button type="submit"
+                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 transition duration-200">
+                            Assign Nurse to Room
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a 
+    class="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-x-100"
+    href = "/home"
+   >
+    Go To Home
+</a>
+</section>
+<script>
+// Function to assign a nurse to a room
+function assignNurseToRoom() {
+const nurseId = document.getElementById('nurse_id').value;
+const roomNumber = document.getElementById('room_number').value;
+const xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+if (xhr.readyState === 4 && xhr.status === 200) {
+const response = JSON.parse(xhr.responseText);
+if (response.status === 'success') {
+alert('Nurse assigned to room successfully.');
+} else {
+alert(response.message);
+}
+}
+};
+xhr.open('POST', '/receptionist/2');
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({nurseId: nurseId, roomNumber: roomNumber}));
+}

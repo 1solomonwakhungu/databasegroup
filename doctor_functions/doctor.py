@@ -8,14 +8,8 @@ DOCTOR_FUNCTIONS = {
 }
 
 
-def perscription(reportID, medicineName, value):
-    output = ""
+def perscription(medicineID, reportID, medicineName, value):
     mycursor = connector.MYDB.cursor()
-    # get medicine ID from table if it exists
-    mycursor.execute(
-        'SELECT medicineId FROM medicine WHERE medicineName = %s', (medicineName))
-    medID = mycursor.fetchone()
-    medicineID = medID['medicineId']
 
     # IF add perscription
     if value == 'Positive':

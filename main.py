@@ -68,10 +68,11 @@ def doctors(action):
 
             if action == 2:
                 action_name = "Assign Perscription"
+                medicineID = request.form['medicine_id']
                 reportID = request.form['report_id']
                 medicineName = request.form['medicine_name']
                 value = request.form['submit']
-                data = doctor.perscription(reportID, medicineName, value)
+                data = doctor.perscription(medicineID, reportID, medicineName, value)
             else:
                 if action == 3:
                     action_name = "Patient Info"

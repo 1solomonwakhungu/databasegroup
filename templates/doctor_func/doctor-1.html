@@ -1,21 +1,67 @@
-{% block content %}
-    <h1>{% block title %} Add a New Message {% endblock %}</h1>
-    <form method="post">
-        <label for="title">Title</label>
-        <br>
-        <input type="text" name="title"
-               placeholder="Message title"
-               value="{{ request.form['title'] }}"></input>
-        <br>
-
-        <label for="content">Message Content</label>
-        <br>
-        <textarea name="content"
-                  placeholder="Message content"
-                  rows="15"
-                  cols="60"
-                  >{{ request.form['content'] }}</textarea>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-{% endblock %}
+<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 h-screen">
+    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+        <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white"
+            style="margin-bottom: 1em">
+            {{ context.action_name }}
+        </h1>
+        <h1 class="text-2xl font-semibold text-center text-green-800 capitalize lg:text-3xl dark:text-white"
+            style="margin-bottom: 1em">
+            {{ context.data.message }}
+        </h1>
+        <!-- Start coding here -->
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+                <div class="w-full md:w-1/2">
+                    <form class="flex items-center" method="POST" action="/doctor/1">
+                        <label for="reportId"
+                               class="block font-medium text-gray-700 dark:text-gray-200">Report ID:</label>
+                        <input type="number"
+                               name="reportId"
+                               id="reportId"
+                               placeholder="Enter Report ID"
+                               class="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:border-blue-500 dark:focus:border-blue-500 dark:focus:shadow-md dark:focus:ring-opacity-50"
+                               required>
+                        <label for="newReportStatus"
+                               class="block font-medium text-gray-700 dark:text-gray-200 mt-3">Room Number:</label>
+                        <input type="text"
+                               name="newReportStatus"
+                               id="newReportStatus"
+                               placeholder="Enter New Report Status"
+                               class="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:border-blue-500 dark:focus:border-blue-500 dark:focus:shadow-md dark:focus:ring-opacity-50"
+                               required>
+                        <button type="submit"
+                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 transition duration-200">
+                            Change Report Status
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a 
+    class="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-x-100"
+    href = "/home"
+   >
+    Go To Home
+</a>
+</section>
+<script>
+// Function to assign a nurse to a room
+function changeReportStatus() {
+const nurseId = document.getElementById('reportId').value;
+const roomNumber = document.getElementById('newReportStatus').value;
+const xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+if (xhr.readyState === 4 && xhr.status === 200) {
+const response = JSON.parse(xhr.responseText);
+if (response.status === 'success') {
+alert('Report Status Changed successfully.');
+} else {
+alert(response.message);
+}
+}
+};
+xhr.open('POST', '/doctor/1');
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({reportId: reportId, newReportStatus: newReportStatus}));
+}

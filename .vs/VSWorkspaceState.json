@@ -3,7 +3,8 @@
     "",
     "\\doctor_functions",
     "\\receptionist_functions",
-    "\\templates"
+    "\\templates",
+    "\\templates\\doctor_func"
   ],
   "SelectedNode": "\\main.py",
   "PreviewInSolutionExplorer": false

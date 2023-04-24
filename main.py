@@ -27,7 +27,7 @@ def login():
         account = mycursor.fetchone()
 
         print("[*] LOGIN:", username, password)
-        if 1==1:
+        if 1 == 1:
             session['logged_in'] = True
             # session['username'] = account['username']
             return redirect(url_for('home'))
@@ -81,29 +81,13 @@ def receptionists(action):
         action_name = ""
         data = {}
 
-        match action:
-            case 1:
-                action_name = "view all doctors"
-                data = receptionist.view_doctors()
-            case 2:
-                action_name = "assign nurse"
-            case _:
-                action_name = ""
-
-        # Information passed to the html template
-        context = {
-            'action_name': action_name,
-            'action': action,
-            'data': data,
-        }
-        return render_template('receptionist_func.html', context=context)
-
         if request.method == 'POST':
             if action == 2:
                 nurse_id = request.form['nurse_id']
                 room_number = request.form['room_number']
                 result = receptionist.assign_nurse_room(nurse_id, room_number)
-                return redirect(url_for('receptionists', action=2))
+                data = {'message': "worked"}
+                # return redirect(url_for('receptionists', action=2))
         else:
             match action:
                 case 1:

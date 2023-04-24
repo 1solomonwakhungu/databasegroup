@@ -12,7 +12,7 @@ def perscription(reportID, medicineName, value):
     mycursor = connector.MYDB.cursor()
     # get medicine ID from table if it exists
     mycursor.execute(
-        'SELECT medicineId FROM medicine WHERE mediciNename = %s', (medicineName))
+        'SELECT medicineId FROM medicine WHERE medicineName = %s', (medicineName))
     medID = mycursor.fetchone()
     medicineID = medID['medicineId']
 
@@ -41,10 +41,15 @@ def perscription(reportID, medicineName, value):
             return (mycursor.execute('SELECT * FROM medicine'))
 
 # function by Ved
-
-
-def changeReportStatus():
+def changeReportStatus(reportId, newReportStatus):
     mycursor = connector.MYDB.cursor()
+    mycursor.execute(
+        'UPDATE report SET labResults = %s WHERE reportId = %s', (newReportStatus, reportId))
+    connector.MYDB.commit()
+
+    return "successfully updated report status"
+
+
 
 # def patientInfo():
     # Request patient name/id

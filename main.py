@@ -60,8 +60,10 @@ def doctors(action):
 
         if request.method == 'POST':
             # other fucnitons go here as if statments of action == number
-            # if action == 1:
-            # data = doctor.changeReportStatus()
+            if action == 1:
+                reportID = request.form["reportId"]
+                newReportStatus = request.form["newReportStatus"]
+                data = doctor.changeReportStatus(reportID, newReportStatus)
 
             if action == 2:
                 reportID = request.form['report_id']

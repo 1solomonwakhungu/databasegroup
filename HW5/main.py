@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from connector import MYDB
+import mysql.connector
 
 app = Flask(__name__, static_url_path='',
             static_folder='./static',
@@ -16,15 +17,17 @@ def login():
 
     if request.method == 'POST':
         # Check if the username and password are correct
-        username = request.values.get('username')
-        password = request.values.get('password')
+        username = request.form['username']
+        password = request.form['password']
 
+        sql = "SELECT * FROM employee WHERE username = '%s' AND password = '%s'" % (
+            username, password)
         mycursor.execute(
             "SELECT * FROM employee WHERE username = '%s' AND password = '%s'" % (username, password))
 
-        account = mycursor.fetchall()
-        # mycursor
-        print(account)
+        account = mycursor.fetchone()
+
+        print(sql)
         print(username, password, account)
         if account:
             session['logged_in'] = True
@@ -38,19 +41,26 @@ def login():
 
 @app.route('/updatePass', methods=['GET', 'POST'])
 def update():
+    conn = mysql.connector.connect(
+        host="localhost", user="root", passwd="VedNigam1", database="hospital_db")
     if request.method == 'GET':
         return render_template('update.html')
 
     if request.method == 'POST':
         # Check if the username and password are correct
-        username = request.values.get('username')
-        password = request.values.get('password')
+        username = request.form['username']
+        password = request.form['password']
 
-        mycursor.execute(
-            "UPDATE employee SET password = '%s' WHERE username = '%s'", (password, username))
+        # db_cursor = MYDB.cursor()
+        sql = f"UPDATE employee SET password = '{password}' WHERE username = '{username}'"
+        conn.autocommit = True
+        mycursorr = conn.cursor()
+        values = (username, password)
+        mycursorr.execute(sql)
 
-        MYDB.commit()
-        print(account, username, password)
+        print(sql)
+
+        return render_template('update.html', error='Password Not Updated')
     else:
         return render_template('update.html')
 

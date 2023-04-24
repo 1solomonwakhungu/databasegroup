@@ -80,6 +80,24 @@ def receptionists(action):
     if session.get('logged_in'):
         action_name = ""
         data = {}
+
+        match action:
+            case 1:
+                action_name = "view all doctors"
+                data = receptionist.view_doctors()
+            case 2:
+                action_name = "example"
+            case _:
+                action_name = ""
+
+        # Information passed to the html template
+        context = {
+            'action_name': action_name,
+            'action': action,
+            'data': data,
+        }
+        return render_template('receptionist_func.html', context=context)
+
         if request.method == 'POST':
             if action == 2:
                 nurse_id = request.form['nurse_id']
@@ -101,6 +119,7 @@ def receptionists(action):
                 'data': data,
             }
             return render_template('receptionist_func.html', context=context)
+
     else:
         return redirect(url_for('login'))
 

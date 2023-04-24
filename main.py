@@ -55,10 +55,33 @@ def home():
         return redirect(url_for('login'))
 
 
-@app.route('/doctor/<int:action>')
+@app.route('/doctor/<int:action>', methods=['GET', 'POST'])
 def doctors(action):
     if session.get('logged_in'):
-        return render_template('doctor_func.html', action=action)
+        action_name = ""
+        data = {}
+
+        if request.method == 'POST':
+            if action == 2:
+                reportID = request.form['report_id']
+                medicineName = request.form['medicine_name']
+                value = request.form['value']
+                data = doctor.perscsription(reportID, medicineName, value)
+
+        else:
+            match action:
+                case 1:
+                    action_name = ""
+                    data = doctor.action1()
+                case _:
+                    action_name = "Assign Perscription"
+                    data = doctor.perscription()
+            # Information passwed to the html template
+            context = {
+             'action_name': action_name,
+             'action': action,
+             'data': data
+             }
     else:
         return redirect(url_for('login'))
 

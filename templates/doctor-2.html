@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Assign Perscription{% endblock %}
+{% block content %}
+
+<form action = "/doctor/2" method = 'POST'>
+    <div>
+        <input
+        type="text"
+        id="report_id"
+        placeholder="Patient Report ID"
+        class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+        />
+    </div>
+    <div>
+        <input
+        type = "text"
+        id = "medicine_name"
+        placeholder = "Medicine name"
+        class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+        />
+    </div>
+    <span>
+        <button name = "addPer" 
+        type = "submit" 
+        value = "positive"
+        class="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
+        >
+        Add
+        </button>
+    </span>
+    <span>
+        <button name = "removePer" 
+        type = "submit" 
+        value = "negative" 
+        class="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
+        >
+        Remove
+        </button>
+    </span>
+    <span>
+        <button name = "viewMed" 
+        type = "submit" 
+        value = "view"
+        class="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
+        >
+        View Medicines
+        </button>
+    </span>
+</form>
+<a 
+    href = "/home"
+    class = "">
+    Go To Home
+</a>
+{% endblock %}

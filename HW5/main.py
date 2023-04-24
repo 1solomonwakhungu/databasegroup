@@ -64,7 +64,9 @@ def update():
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    if session['logged_in'] == True:
+        return render_template('home.html')
+    return rredirect(url_for('login'))
 
 
 if __name__ == '__main__':

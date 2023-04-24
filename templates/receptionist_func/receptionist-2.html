@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Create Appointment</title>
-</head>
-<body>
-	<h1>Create Appointment</h1>
-	<form action="create_appointment.py" method="post">
-		<label for="patient_id">Patient ID:</label>
-		<input type="text" id="patient_id" name="patient_id"><br><br>
-		<label for="doctor_id">Doctor ID:</label>
-		<input type="text" id="doctor_id" name="doctor_id"><br><br>
-		<label for="appointment_date">Appointment Date:</label>
-		<input type="date" id="appointment_date" name="appointment_date"><br><br>
-		<label for="appointment_time">Appointment Time:</label>
-		<input type="time" id="appointment_time" name="appointment_time"><br><br>
-		<input type="submit" value="Create Appointment">
-	</form>
-</body>
+    <head>
+        <title>Create Appointment</title>
+    </head>
+    <body>
+        <h1>Create Appointment</h1>
+        <form action="/receptionist/2" method="POST">
+            <label for="patient_id">Patient ID:</label>
+            <input type="text" id="patient_id" name="patient_id">
+            <br>
+            <br>
+            <label for="doctor_id">Doctor ID:</label>
+            <input type="text" id="doctor_id" name="doctor_id">
+            <br>
+            <br>
+            <label for="appointment_date">Appointment Date:</label>
+            <input type="date" id="appointment_date" name="appointment_date">
+            <br>
+            <br>
+            <label for="appointment_time">Appointment Time:</label>
+            <input type="time" id="appointment_time" name="appointment_time">
+            <br>
+            <br>
+            <input type="submit" value="Create Appointment">
+        </form>
+    </body>
 </html>

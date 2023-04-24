@@ -52,8 +52,9 @@ def home():
         return redirect(url_for('login'))
 
 
-@app.route('/doctor/<int:action>')
-if session.get('logged_in'):
+@app.route('/doctor/<int:action>', methods=['GET', 'POST'])
+def doctors(action):
+    if session.get('logged_in'):
         action_name = ""
         data = {}
 
@@ -79,6 +80,7 @@ if session.get('logged_in'):
         return render_template('doctor_func.html', context=context)
     else:
         return redirect(url_for('login'))
+
 
 @app.route('/receptionist/<int:action>', methods=['GET', 'POST'])
 def receptionists(action):
@@ -106,6 +108,9 @@ def receptionists(action):
                     data = receptionist.view_doctors()
                 case 2:
                     action_name = "assign nurse to room"
+                case 4:
+                    action_name = "view nurses"
+                    data = receptionist.view_nurses()
 
             # Information passed to the html template
             context = {

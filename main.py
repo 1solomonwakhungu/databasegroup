@@ -53,18 +53,24 @@ def home():
 
 
 @app.route('/doctor/<int:action>')
-def doctors(action):
-    if session.get('logged_in'):
+if session.get('logged_in'):
         action_name = ""
         data = {}
-        match action:
-            case 1:
-                action_name = "change report status"
-                data = doctor.changeReportStatus()
-            case _:
-                action_name = ""
 
-        # Information passwed to the html template
+        if request.method == 'POST':
+            # other fucnitons go here as if statments of action == number
+            # if action == 1:
+            # data = doctor.changeReportStatus()
+
+            if action == 2:
+                reportID = request.form['report_id']
+                medicineName = request.form['medicine_name']
+                value = request.form['submit']
+                data = doctor.perscription(reportID, medicineName, value)
+
+            # Function 3 Here
+
+            # Information passed to the html template
         context = {
             'action_name': action_name,
             'action': action,
@@ -73,7 +79,6 @@ def doctors(action):
         return render_template('doctor_func.html', context=context)
     else:
         return redirect(url_for('login'))
-
 
 @app.route('/receptionist/<int:action>', methods=['GET', 'POST'])
 def receptionists(action):

@@ -111,7 +111,6 @@ def receptionists(action):
                 case 4:
                     action_name = "view nurses"
                     data = receptionist.view_nurses()
-                    print(data)
 
             # Information passed to the html template
             context = {

@@ -1,6 +1,6 @@
 import connector
 
-mycursor = connector.MDBY.mycursor()
+
 
 DOCTOR_FUNCTIONS = {
     1: "change report status",
@@ -10,6 +10,7 @@ DOCTOR_FUNCTIONS = {
 
 
 def perscription(reportID, medicineName, value):
+    mycursor = connector.MDBY.mycursor()
     #get medicine ID from table if it exists
     mycursor.execute('SELECT medicineid WHERE medicinename = %s', (medicineName))
     medicineID = mycursor.fetchone()

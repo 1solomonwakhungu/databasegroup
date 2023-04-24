@@ -57,6 +57,10 @@ def doctors(action):
     if session.get('logged_in'):
         action_name = ""
         data = {}
+
+        if request.method == 'GET':
+            return render_template('doctor_func.html')
+
         if request.method == 'POST':
             #other fucnitons go here as if statments of action == number
             #if action == 1:
@@ -77,10 +81,6 @@ def doctors(action):
                 'data': data
             }
             return render_template('doctor_func.html', context=context)
-             
-        if request.method == 'GET':
-            return render_template('home.html')
-            
     else:
         return redirect(url_for('login'))
 

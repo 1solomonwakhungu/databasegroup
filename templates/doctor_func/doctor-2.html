@@ -5,16 +5,25 @@
 
 <form action = "/doctor/2" method = 'POST'>
     <div>
+        <label for="report_id" class="block text-xs font-medium text-gray-700">
+        Report ID
+        </label>
+        
         <input
         type="text"
+        id = "report_id"
         name="report_id"
         placeholder="Patient Report ID"
         class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
         />
     </div>
     <div>
+        <label for="medicine_name" class="block text-xs font-medium text-gray-700">
+        Medicine Name
+        </label>
         <input
         type = "text"
+        id = "medicine_name"
         name = "medicine_name"
         placeholder = "Medicine name"
         class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
@@ -24,7 +33,7 @@
         <button name = "submit" 
         type = "submit" 
         value = "positive"
-        class="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
+        class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
         >
         Add
         </button>
@@ -33,7 +42,7 @@
         <button name = "submit" 
         type = "submit" 
         value = "negative" 
-        class="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
+        class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
         >
         Remove
         </button>
@@ -42,7 +51,7 @@
         <button name = "submit" 
         type = "submit" 
         value = "view"
-        class="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
+        class="inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
         >
         View Medicines
         </button>
